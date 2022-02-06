@@ -1,5 +1,6 @@
 const addBtn = document.querySelector("#add-btn");
 const clearBtn = document.querySelector("#clear-btn");
+const copyBtn = document.querySelector("#copy-btn");
 const ulEl = document.querySelector("#ul-el");
 
 let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
@@ -15,6 +16,8 @@ clearBtn.addEventListener("click", function () {
   bookmarks = [];
   renderBookmarks(bookmarks);
 });
+
+copyBtn.addEventListener("click", function () {});
 
 function renderBookmarks(arr) {
   let liItem = "";
