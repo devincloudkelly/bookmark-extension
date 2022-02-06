@@ -2,23 +2,26 @@ const addBtn = document.querySelector("#add-btn");
 const clearBtn = document.querySelector("#clear-btn");
 const ulEl = document.querySelector("#ul-el");
 
-let bookmarks = [];
+let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
 
 addBtn.addEventListener("click", function () {
   bookmarks.push("www.example.com");
-  console.log(bookmarks);
-  renderBookmarks();
+  localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+  renderBookmarks(bookmarks);
 });
 
 clearBtn.addEventListener("click", function () {
+  localStorage.clear();
   bookmarks = [];
-  renderBookmarks();
+  renderBookmarks(bookmarks);
 });
 
-function renderBookmarks() {
+function renderBookmarks(arr) {
   let liItem = "";
-  for (let i = 0; i < bookmarks.length; i++) {
-    liItem += `<li>${bookmarks[i]}</li>`;
+  for (let i = 0; i < arr.length; i++) {
+    liItem += `<li>${arr[i]}</li>`;
   }
   ulEl.innerHTML = liItem;
 }
+
+renderBookmarks(bookmarks);
