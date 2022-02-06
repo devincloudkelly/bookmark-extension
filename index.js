@@ -1,4 +1,5 @@
 const addBtn = document.querySelector("#add-btn");
+const clearBtn = document.querySelector("#clear-btn");
 const ulEl = document.querySelector("#ul-el");
 
 let bookmarks = [];
@@ -6,6 +7,11 @@ let bookmarks = [];
 addBtn.addEventListener("click", function () {
   bookmarks.push("www.example.com");
   console.log(bookmarks);
+  renderBookmarks();
+});
+
+clearBtn.addEventListener("click", function () {
+  bookmarks = [];
   renderBookmarks();
 });
 
