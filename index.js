@@ -25,7 +25,7 @@ copyBtn.addEventListener("click", function () {
 function renderBookmarks(arr) {
   let liItem = "";
   for (let i = 0; i < arr.length; i++) {
-    liItem += `<li>${arr[i]}</li>`;
+    liItem += `<a target="_blank" href="#"><li>${arr[i]}</li></a>`;
   }
   ulEl.innerHTML = liItem;
 }
