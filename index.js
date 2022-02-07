@@ -17,7 +17,10 @@ clearBtn.addEventListener("click", function () {
   renderBookmarks(bookmarks);
 });
 
-copyBtn.addEventListener("click", function () {});
+copyBtn.addEventListener("click", function () {
+  let copiedText = bookmarks.join("\n");
+  navigator.clipboard.writeText(copiedText);
+});
 
 function renderBookmarks(arr) {
   let liItem = "";
