@@ -25,7 +25,9 @@ copyBtn.addEventListener("click", function () {
 function renderBookmarks(arr) {
   let liItem = "";
   for (let i = 0; i < arr.length; i++) {
-    liItem += `<li><a target="_blank" href="#">${arr[i]}</a><button class="notes-btn button-invert" id='button-${i}'>+</button></li>`;
+    liItem += `<li><a target="_blank" href="#">${arr[i][0]}</a><p>${
+      arr[i][1] || ""
+    }</p><button class="notes-btn button-invert" id='button-${i}'>+</button></li>`;
   }
   ulEl.innerHTML = liItem;
   addNoteListeners();
@@ -52,3 +54,8 @@ function addNotes(e) {
   );
   renderBookmarks(bookmarks);
 }
+
+// NEXT STEPS:
+// Build in html for displaying notes
+// Update 'add' button so it pulls the current url instead of our fixed url
+// Add in input once the + notes button is clicked, build out functionality
