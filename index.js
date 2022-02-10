@@ -6,7 +6,12 @@ const ulEl = document.querySelector("#ul-el");
 let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
 
 addBtn.addEventListener("click", function () {
-  bookmarks.push(["www.example.com"]);
+  // bookmarks.push(["www.example.com"]);
+  let url;
+  chrome.tabs.query({ active: true, lastFocusedWinder: true }, function (tabs) {
+    url = tabs[0].url;
+  });
+  bookmarks.push([url]);
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   renderBookmarks(bookmarks);
 });
@@ -56,6 +61,5 @@ function addNotes(e) {
 }
 
 // NEXT STEPS:
-// Build in html for displaying notes
 // Update 'add' button so it pulls the current url instead of our fixed url
 // Add in input once the + notes button is clicked, build out functionality
