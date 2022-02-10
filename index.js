@@ -47,10 +47,12 @@ function addNotes(e) {
   // get the number at end of button id from click event.
   const index = parseInt(btnId.slice(-1));
   // use that number to match the button to the element index in Bookmarks
+  bookmarks[index][1] = `new note for element ${index}`;
   console.log(
     `adding a note to the ${index} index of the bookmarks tab, `,
     bookmarks[index]
   );
+  renderBookmarks(bookmarks);
   // add the new note as the second element in the matching array. ex, element one in bookmarks is an array with a url in the first position; this note will go in the second position of that array,
 }
 
