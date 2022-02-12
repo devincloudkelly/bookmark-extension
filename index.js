@@ -6,12 +6,12 @@ const ulEl = document.querySelector("#ul-el");
 let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
 
 addBtn.addEventListener("click", function () {
-  // bookmarks.push(["www.example.com"]);
-  let url;
-  chrome.tabs.query({ active: true, lastFocusedWinder: true }, function (tabs) {
-    url = tabs[0].url;
-  });
-  bookmarks.push([url]);
+  bookmarks.push(["www.example.com"]);
+  // let url;
+  // chrome.tabs.query({ active: true, lastFocusedWinder: true }, function (tabs) {
+  //   url = tabs[0].url;
+  // });
+  // bookmarks.push([url]);
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   renderBookmarks(bookmarks);
 });
@@ -44,22 +44,37 @@ function addNoteListeners() {
   let allNotesBtns = document.querySelectorAll(".notes-btn");
   allNotesBtns.forEach(function (btn, index) {
     btn.addEventListener("click", function (e) {
-      addNotes(e);
+      renderNoteInput(e);
     });
   });
 }
 
-function addNotes(e) {
+function renderNoteInput(e) {
+  const btn = e.target;
   const btnId = e.target.id;
   const index = parseInt(btnId.slice(-1)); // get the number at end of button id from click event.
-  bookmarks[index][1] = `new note for element ${index}`; // use that number to match the button to the element index in Bookmarks
-  console.log(
-    `adding a note to the ${index} index of the bookmarks tab, `,
-    bookmarks[index]
-  );
+  const input = document.createElement("input");
+  input.id = `add-note-${index}`;
+  const submitBtn = document.createElement("button");
+
+  submitBtn.innerText = "Add Note";
+  btn.insertAdjacentElement("afterend", input);
+  input.insertAdjacentElement("afterend", submitBtn);
+
+  submitBtn.addEventListener("click", function () {
+    addNotes(input);
+    // console.log(input.value);
+  });
+}
+
+function addNotes(input) {
+  const value = input.value;
+  const index = parseInt(input.id.slice(-1));
+
+  bookmarks[index][1] = value;
+  console.log(bookmarks[index]);
   renderBookmarks(bookmarks);
 }
 
 // NEXT STEPS:
 // Update 'add' button so it pulls the current url instead of our fixed url
-// Add in input once the + notes button is clicked, build out functionality
