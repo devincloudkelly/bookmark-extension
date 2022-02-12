@@ -54,19 +54,22 @@ function addNoteListeners() {
 function renderNoteInput(e) {
   const btn = e.target;
   const btnId = e.target.id;
-  const index = parseInt(btnId.slice(-1)); // get the number at end of button id from click event.
-  const input = document.createElement("input");
-  input.id = `add-note-${index}`;
-  const submitBtn = document.createElement("button");
+  const index = parseInt(btnId.slice(-1));
+  const existingInput = document.querySelector(`#add-note-${index}`);
+  if (!existingInput) {
+    const input = document.createElement("input");
+    input.id = `add-note-${index}`;
+    const submitBtn = document.createElement("button");
+    bookmarks[index][1]
+      ? (submitBtn.innerText = "Update Note")
+      : (submitBtn.innerText = "Add Note");
+    btn.insertAdjacentElement("afterend", input);
+    input.insertAdjacentElement("afterend", submitBtn);
 
-  submitBtn.innerText = "Add Note";
-  btn.insertAdjacentElement("afterend", input);
-  input.insertAdjacentElement("afterend", submitBtn);
-
-  submitBtn.addEventListener("click", function () {
-    addNotes(input);
-    // console.log(input.value);
-  });
+    submitBtn.addEventListener("click", function () {
+      addNotes(input);
+    });
+  }
 }
 
 function addNotes(input) {
