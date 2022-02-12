@@ -30,9 +30,11 @@ copyBtn.addEventListener("click", function () {
 function renderBookmarks(arr) {
   let liItem = "";
   for (let i = 0; i < arr.length; i++) {
-    liItem += `<li><a target="_blank" href="#">${arr[i][0]}</a><p>${
+    liItem += `<li><a target="_blank" href="#">${
+      arr[i][0]
+    }</a><button class="notes-btn button-invert" id='button-${i}'>+</button><p>${
       arr[i][1] || ""
-    }</p><button class="notes-btn button-invert" id='button-${i}'>+</button></li>`;
+    }</p></li>`;
   }
   ulEl.innerHTML = liItem;
   addNoteListeners();
