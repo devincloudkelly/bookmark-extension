@@ -23,7 +23,7 @@ clearBtn.addEventListener("click", function () {
 });
 
 copyBtn.addEventListener("click", function () {
-  let copiedText = bookmarks.join("\n");
+  let copiedText = bookmarks.flat().join("\n");
   navigator.clipboard.writeText(copiedText);
 });
 
