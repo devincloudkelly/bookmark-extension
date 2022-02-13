@@ -60,15 +60,14 @@ function renderNoteInput(e) {
   if (!existingInput) {
     const div = document.querySelector(`#notes-div-${index}`);
     console.log(div);
-    // div.classList.add("notes-div");
     const input = document.createElement("input");
     input.id = `add-note-${index}`;
     const submitBtn = document.createElement("button");
+    submitBtn.classList.add("submit-btn");
     bookmarks[index][1]
       ? (submitBtn.innerText = "Update Note")
       : (submitBtn.innerText = "Add Note");
     div.append(input, submitBtn);
-    // btn.insertAdjacentElement("afterend", div);
 
     submitBtn.addEventListener("click", function () {
       addNotes(input);
