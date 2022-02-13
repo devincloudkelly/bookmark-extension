@@ -32,9 +32,9 @@ function renderBookmarks(arr) {
   for (let i = 0; i < arr.length; i++) {
     liItem += `<li><a target="_blank" href="#">${
       arr[i][0]
-    }</a><button class="notes-btn button-invert" id='button-${i}'>+</button><p>${
+    }</a><button class="notes-btn button-invert" id='button-${i}'>+</button><div class="notes-div" id="notes-div-${i}"><p>${
       arr[i][1] || ""
-    }</p></li>`;
+    }</p></div></li>`;
   }
   ulEl.innerHTML = liItem;
   addNoteListeners();
@@ -57,14 +57,17 @@ function renderNoteInput(e) {
   const index = parseInt(btnId.slice(-1));
   const existingInput = document.querySelector(`#add-note-${index}`);
   if (!existingInput) {
+    const div = document.querySelector(`#notes-div-${index}`);
+    console.log(div);
+    // div.classList.add("notes-div");
     const input = document.createElement("input");
     input.id = `add-note-${index}`;
     const submitBtn = document.createElement("button");
     bookmarks[index][1]
       ? (submitBtn.innerText = "Update Note")
       : (submitBtn.innerText = "Add Note");
-    btn.insertAdjacentElement("afterend", input);
-    input.insertAdjacentElement("afterend", submitBtn);
+    div.append(input, submitBtn);
+    // btn.insertAdjacentElement("afterend", div);
 
     submitBtn.addEventListener("click", function () {
       addNotes(input);
