@@ -30,6 +30,7 @@ copyBtn.addEventListener("click", function () {
 function renderBookmarks(arr) {
   let liItem = "";
   for (let i = 0; i < arr.length; i++) {
+    console.log("first item: ", arr[i][0], "second item: ", arr[i][1]);
     liItem += `<li><a target="_blank" href="#">${
       arr[i][0]
     }</a><button class="notes-btn button-invert" id='button-${i}'>+</button><div class="notes-div" id="notes-div-${i}"><p>${
@@ -80,6 +81,7 @@ function addNotes(input) {
   const index = parseInt(input.id.slice(-1));
 
   bookmarks[index][1] = value;
+  localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   console.log(bookmarks[index]);
   renderBookmarks(bookmarks);
 }
