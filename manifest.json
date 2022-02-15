@@ -1,11 +1,11 @@
 {
-  "manifest_version": 3,
   "name": "Curator Tab Organizer",
   "description": "This extension allows you to save urls with the click of the button, add notes to each one, and easily share your notated urls for easier and better planning and collaboration.",
-  "version": 1.0,
+  "version": "1.0",
   "browser_action": {
     "default_icon": "icon.png",
-    "default_popup": "popup.html"
+    "default_popup": "index.html"
   },
-  "permissions": ["clipboardRead", "clipboardWrite", "tabs"]
+  "permissions": ["clipboardRead", "clipboardWrite", "tabs"],
+  "manifest_version": 2
 }

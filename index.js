@@ -6,12 +6,12 @@ const ulEl = document.querySelector("#ul-el");
 let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
 
 addBtn.addEventListener("click", function () {
-  bookmarks.push(["www.example.com"]);
-  // let url;
-  // chrome.tabs.query({ active: true, lastFocusedWinder: true }, function (tabs) {
-  //   url = tabs[0].url;
-  // });
-  // bookmarks.push([url]);
+  // bookmarks.push(["www.example.com"]);
+  let url;
+  chrome.tabs.query({ active: true, lastFocusedWinder: true }, function (tabs) {
+    url = tabs[0].url;
+  });
+  bookmarks.push([url]);
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   renderBookmarks(bookmarks);
 });
