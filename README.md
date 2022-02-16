@@ -1,6 +1,6 @@
-# bookmark-extension
+# TABS bookmark manager
 
-Curate and share your bookmarks with ease. Install this Chrome extension to easily save urls, add/edit notes for each url and share with others. 
+Curate and share bookmarks with ease. Install the TABS Chrome extension to easily save urls, add/edit notes for each url and share with others. 
 
 ## Installing
 - Fork this repository and save it on your computer. 
