@@ -7,10 +7,8 @@ let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
 
 addBtn.addEventListener("click", function () {
   // used for local testing
-  bookmarks.push([
-    "www.someverylongexampleemaithatisover60characters.com/something/somethingelse/evenmorethings/hopefullythisismorethan60",
-  ]);
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+  bookmarks.push(["www.shortemail.com"]);
   renderBookmarks(bookmarks);
 
   // used for the live chrome extension
@@ -46,11 +44,7 @@ function renderBookmarks(arr) {
 }
 
 function truncateUrl(url) {
-  if (url.length >= 50) {
-    return url.slice(0, 47) + "...";
-  } else {
-    return url;
-  }
+  return url.length >= 50 ? url.slice(0, 47) + "..." : url;
 }
 
 renderBookmarks(bookmarks);
