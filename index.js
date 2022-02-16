@@ -84,4 +84,4 @@ function addNotes(input) {
 }
 
 // NEXT STEPS:
-// Update 'add' button so it pulls the current url instead of our fixed url
+// update url text render to be shortened if it is too many characters.
