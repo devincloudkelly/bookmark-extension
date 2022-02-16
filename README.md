@@ -25,3 +25,5 @@ Planning trips with others can be confusing and stressful. Use this extension to
 ### Interior design / redecorating
 Filling a room and getting everything to match can be difficult. This extension can help you gather links to furniture you want to add, and allows you to comment on each piece.
 
+## About
+This extension was built using JavaScript, HTML and CSS. The icon was built using Canva.
