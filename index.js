@@ -6,12 +6,6 @@ const ulEl = document.querySelector("#ul-el");
 let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
 
 addBtn.addEventListener("click", function () {
-  // used for local testing
-  // localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
-  // bookmarks.push(["www.shortemail.com"]);
-  // renderBookmarks(bookmarks);
-
-  // used for the live chrome extension
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     bookmarks.push([tabs[0].url]);
     localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
@@ -108,7 +102,3 @@ function addNotes(input) {
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   renderBookmarks(bookmarks);
 }
-
-// NEXT STEPS:
-// add delete button to delete url
-// Add Readme
