@@ -6,12 +6,17 @@ const ulEl = document.querySelector("#ul-el");
 let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
 
 addBtn.addEventListener("click", function () {
-  // bookmarks.push(["www.example.com"]);
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    bookmarks.push([tabs[0].url]);
-    localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
-    renderBookmarks(bookmarks);
-  });
+  // used for local testing
+  bookmarks.push(["www.example.com"]);
+  localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+  renderBookmarks(bookmarks);
+
+  // used for the live chrome extension
+  // chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+  //   bookmarks.push([tabs[0].url]);
+  //   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+  //   renderBookmarks(bookmarks);
+  // });
 });
 
 clearBtn.addEventListener("click", function () {
@@ -28,7 +33,6 @@ copyBtn.addEventListener("click", function () {
 function renderBookmarks(arr) {
   let liItem = "";
   for (let i = 0; i < arr.length; i++) {
-    console.log("first item: ", arr[i][0], "second item: ", arr[i][1]);
     liItem += `<li><a target="_blank" href="#">${
       arr[i][0]
     }</a><button class="notes-btn button-invert" id='button-${i}'>+</button><div class="notes-div" id="notes-div-${i}"><p>${
@@ -51,26 +55,29 @@ function addNoteListeners() {
 }
 
 function renderNoteInput(e) {
-  const btn = e.target;
   const btnId = e.target.id;
   const index = parseInt(btnId.slice(-1));
   const existingInput = document.querySelector(`#add-note-${index}`);
   if (!existingInput) {
-    const div = document.querySelector(`#notes-div-${index}`);
-    console.log(div);
-    const input = document.createElement("input");
-    input.id = `add-note-${index}`;
-    const submitBtn = document.createElement("button");
-    submitBtn.classList.add("submit-btn");
-    bookmarks[index][1]
-      ? (submitBtn.innerText = "Update Note")
-      : (submitBtn.innerText = "Add Note");
-    div.append(input, submitBtn);
-
-    submitBtn.addEventListener("click", function () {
-      addNotes(input);
-    });
+    console.log("calling createNoteForm with index: ", index);
+    createNoteForm(index);
   }
+}
+function createNoteForm(index) {
+  console.log("createNoteForm running with index; ", index);
+  const div = document.querySelector(`#notes-div-${index}`);
+  const input = document.createElement("input");
+  input.id = `add-note-${index}`;
+  const submitBtn = document.createElement("button");
+  submitBtn.classList.add("submit-btn");
+  bookmarks[index][1]
+    ? (submitBtn.innerText = "Update Note")
+    : (submitBtn.innerText = "Add Note");
+  div.append(input, submitBtn);
+
+  submitBtn.addEventListener("click", function () {
+    addNotes(input);
+  });
 }
 
 function addNotes(input) {
@@ -79,9 +86,10 @@ function addNotes(input) {
 
   bookmarks[index][1] = value;
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
-  console.log(bookmarks[index]);
   renderBookmarks(bookmarks);
 }
 
 // NEXT STEPS:
 // update url text render to be shortened if it is too many characters.
+// set a fixed width for the extension instead of a min-width
+// add delete button to delete url
