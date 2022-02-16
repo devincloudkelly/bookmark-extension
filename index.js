@@ -63,12 +63,10 @@ function renderNoteInput(e) {
   const index = parseInt(btnId.slice(-1));
   const existingInput = document.querySelector(`#add-note-${index}`);
   if (!existingInput) {
-    console.log("calling createNoteForm with index: ", index);
     createNoteForm(index);
   }
 }
 function createNoteForm(index) {
-  console.log("createNoteForm running with index; ", index);
   const div = document.querySelector(`#notes-div-${index}`);
   const input = document.createElement("input");
   input.id = `add-note-${index}`;
@@ -94,6 +92,5 @@ function addNotes(input) {
 }
 
 // NEXT STEPS:
-// update url text render to be shortened if it is too many characters.
 // set a fixed width for the extension instead of a min-width
 // add delete button to delete url
