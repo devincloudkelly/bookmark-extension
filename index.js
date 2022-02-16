@@ -35,12 +35,13 @@ function renderBookmarks(arr) {
   for (let i = 0; i < arr.length; i++) {
     liItem += `<li><a target="_blank" href="${arr[i][0]}">${truncateUrl(
       arr[i][0]
-    )}</a><button class="notes-btn button-invert" id='button-${i}'>+</button><div class="notes-div" id="notes-div-${i}"><p>${
+    )}</a><button class="notes-btn button-invert" id='button-${i}'>+</button><button class="delete-notes-btn button-invert" id='delete-button-${i}'>-</button><div class="notes-div" id="notes-div-${i}"><p>${
       arr[i][1] || ""
     }</p></div></li>`;
   }
   ulEl.innerHTML = liItem;
   addNoteListeners();
+  addDeleteListeners();
 }
 
 function truncateUrl(url) {
@@ -56,6 +57,23 @@ function addNoteListeners() {
       renderNoteInput(e);
     });
   });
+}
+
+function addDeleteListeners() {
+  let deleteNoteBtns = document.querySelectorAll(".delete-notes-btn");
+  deleteNoteBtns.forEach(function (btn, index) {
+    btn.addEventListener("click", function (e) {
+      deleteUrl(e);
+    });
+  });
+}
+
+function deleteUrl(e) {
+  const btnId = e.target.id;
+  const index = parseInt(btnId.slice(-1));
+  bookmarks.splice(index, 1);
+  localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+  renderBookmarks(bookmarks);
 }
 
 function renderNoteInput(e) {
@@ -92,5 +110,5 @@ function addNotes(input) {
 }
 
 // NEXT STEPS:
-// set a fixed width for the extension instead of a min-width
 // add delete button to delete url
+// Add Readme
