@@ -7,13 +7,11 @@ let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
 
 addBtn.addEventListener("click", function () {
   // bookmarks.push(["www.example.com"]);
-  let url;
-  chrome.tabs.query({ active: true, lastFocusedWindow: true }, function (tabs) {
-    url = tabs[0].url;
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    bookmarks.push([tabs[0].url]);
+    localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+    renderBookmarks(bookmarks);
   });
-  bookmarks.push([url]);
-  localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
-  renderBookmarks(bookmarks);
 });
 
 clearBtn.addEventListener("click", function () {
