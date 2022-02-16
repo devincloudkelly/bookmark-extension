@@ -7,7 +7,9 @@ let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
 
 addBtn.addEventListener("click", function () {
   // used for local testing
-  bookmarks.push(["www.example.com"]);
+  bookmarks.push([
+    "www.someverylongexampleemaithatisover60characters.com/something/somethingelse/evenmorethings/hopefullythisismorethan60",
+  ]);
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   renderBookmarks(bookmarks);
 
@@ -33,14 +35,22 @@ copyBtn.addEventListener("click", function () {
 function renderBookmarks(arr) {
   let liItem = "";
   for (let i = 0; i < arr.length; i++) {
-    liItem += `<li><a target="_blank" href="#">${
+    liItem += `<li><a target="_blank" href="${arr[i][0]}">${truncateUrl(
       arr[i][0]
-    }</a><button class="notes-btn button-invert" id='button-${i}'>+</button><div class="notes-div" id="notes-div-${i}"><p>${
+    )}</a><button class="notes-btn button-invert" id='button-${i}'>+</button><div class="notes-div" id="notes-div-${i}"><p>${
       arr[i][1] || ""
     }</p></div></li>`;
   }
   ulEl.innerHTML = liItem;
   addNoteListeners();
+}
+
+function truncateUrl(url) {
+  if (url.length >= 50) {
+    return url.slice(0, 47) + "...";
+  } else {
+    return url;
+  }
 }
 
 renderBookmarks(bookmarks);
