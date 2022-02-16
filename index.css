@@ -53,16 +53,14 @@ button:hover {
   filter: brightness(0.96);
 }
 
-li button {
+.small-btn {
   font-size: 14px;
   line-height: 10px;
-  padding: 4px 6px;
+  width: 20px;
+  height: 20px;
+  padding: 0px;
   margin-left: 10px;
   border-radius: 3px;
-}
-
-.submit-btn {
-  padding: 12px 20px;
 }
 
 footer {

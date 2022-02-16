@@ -35,7 +35,7 @@ function renderBookmarks(arr) {
   for (let i = 0; i < arr.length; i++) {
     liItem += `<li><a target="_blank" href="${arr[i][0]}">${truncateUrl(
       arr[i][0]
-    )}</a><button class="notes-btn button-invert" id='button-${i}'>+</button><button class="delete-notes-btn button-invert" id='delete-button-${i}'>-</button><div class="notes-div" id="notes-div-${i}"><p>${
+    )}</a><button class="notes-btn button-invert small-btn" id='button-${i}'>+</button><button class="delete-notes-btn button-invert small-btn" id='delete-button-${i}'>-</button><div class="notes-div" id="notes-div-${i}"><p>${
       arr[i][1] || ""
     }</p></div></li>`;
   }
