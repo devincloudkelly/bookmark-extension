@@ -24,13 +24,15 @@ copyBtn.addEventListener("click", function () {
   navigator.clipboard.writeText(copiedText);
 });
 
-function renderBookmarks(arr) {
+function renderBookmarks(bookmarks) {
   let liItem = "";
-  for (let i = 0; i < arr.length; i++) {
-    liItem += `<li><a target="_blank" href="${arr[i][0]}">${truncateUrl(
-      arr[i][0]
-    )}</a><button class="notes-btn button-invert small-btn" id='button-${i}'>+</button><button class="delete-notes-btn button-invert small-btn" id='delete-button-${i}'>-</button><div class="notes-div" id="notes-div-${i}"><p>${
-      arr[i][1] || ""
+  for (let index = 0; index < bookmarks.length; index++) {
+    liItem += `<li><a target="_blank" href="${
+      bookmarks[index][0]
+    }">${truncateUrl(
+      bookmarks[index][0]
+    )}</a><button class="notes-btn button-invert small-btn" id='button-${index}'>+</button><button class="delete-notes-btn button-invert small-btn" id='delete-button-${index}'>-</button><div class="notes-div" id="notes-div-${index}"><p>${
+      bookmarks[index][1] || ""
     }</p></div></li>`;
   }
   ulEl.innerHTML = liItem;
