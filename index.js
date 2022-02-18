@@ -104,3 +104,5 @@ function addNotes(input) {
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   renderBookmarks(bookmarks);
 }
+
+// need to remove event listeners. I think that will go in the render function at the beginning, in order to clear any old listeners before new nodes are created.
