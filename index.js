@@ -6,11 +6,16 @@ const ulEl = document.querySelector("#ul-el");
 let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
 
 addBtn.addEventListener("click", function () {
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    bookmarks.push([tabs[0].url]);
-    localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
-    renderBookmarks(bookmarks);
-  });
+  let bookmark = window.location.href;
+  bookmarks.push([bookmark]);
+  localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+  renderBookmarks(bookmarks);
+  // activate below for extension. Use above for testing.
+  // chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+  //   bookmarks.push([tabs[0].url]);
+  //   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+  //   renderBookmarks(bookmarks);
+  // });
 });
 
 clearBtn.addEventListener("click", function () {
@@ -55,12 +60,16 @@ function addNoteListeners() {
   });
 }
 
+function deleteBtnListener(e) {
+  const btn = e.target;
+  btn.removeEventListener("click", deleteBtnListener);
+  deleteUrl(e);
+}
+
 function addDeleteListeners() {
   let deleteNoteBtns = document.querySelectorAll(".delete-notes-btn");
   deleteNoteBtns.forEach(function (btn, index) {
-    btn.addEventListener("click", function (e) {
-      deleteUrl(e);
-    });
+    btn.addEventListener("click", deleteBtnListener);
   });
 }
 
