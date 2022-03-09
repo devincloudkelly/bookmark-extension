@@ -49,7 +49,7 @@ function renderBookmarks(bookmarks) {
 }
 
 function truncateUrl(url) {
-  return url.length >= 50 ? url.slice(0, 47) + "..." : url;
+  return url.length >= 48 ? url.slice(0, 45) + "..." : url;
 }
 
 renderBookmarks(bookmarks);
