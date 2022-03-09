@@ -6,16 +6,11 @@ const ulEl = document.querySelector("#ul-el");
 let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
 
 addBtn.addEventListener("click", function () {
-  let bookmark = window.location.href;
-  bookmarks.push([bookmark]);
-  localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
-  renderBookmarks(bookmarks);
-  // activate below for extension. Use above for testing.
-  // chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-  //   bookmarks.push([tabs[0].url]);
-  //   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
-  //   renderBookmarks(bookmarks);
-  // });
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    bookmarks.push([tabs[0].url]);
+    localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+    renderBookmarks(bookmarks);
+  });
 });
 
 clearBtn.addEventListener("click", function () {
