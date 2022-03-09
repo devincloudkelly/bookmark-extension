@@ -30,6 +30,14 @@ copyBtn.addEventListener("click", function () {
 });
 
 function renderBookmarks(bookmarks) {
+  let allNotesBtns = document.querySelectorAll(".notes-btn");
+  allNotesBtns.forEach(function (btn) {
+    btn.removeEventListener("click", addNoteBtnListener);
+  });
+  let deleteNotesBtns = document.querySelectorAll(".delete-notes-btn");
+  deleteNotesBtns.forEach(function (btn) {
+    btn.removeEventListener("click", deleteBtnListener);
+  });
   let liItem = "";
   for (let index = 0; index < bookmarks.length; index++) {
     liItem += `<li><a target="_blank" href="${
@@ -51,12 +59,14 @@ function truncateUrl(url) {
 
 renderBookmarks(bookmarks);
 
+function addNoteBtnListener(e) {
+  renderNoteInput(e);
+}
+
 function addNoteListeners() {
   let allNotesBtns = document.querySelectorAll(".notes-btn");
-  allNotesBtns.forEach(function (btn, index) {
-    btn.addEventListener("click", function (e) {
-      renderNoteInput(e);
-    });
+  allNotesBtns.forEach(function (btn) {
+    btn.addEventListener("click", addNoteBtnListener);
   });
 }
 
@@ -68,7 +78,7 @@ function deleteBtnListener(e) {
 
 function addDeleteListeners() {
   let deleteNoteBtns = document.querySelectorAll(".delete-notes-btn");
-  deleteNoteBtns.forEach(function (btn, index) {
+  deleteNoteBtns.forEach(function (btn) {
     btn.addEventListener("click", deleteBtnListener);
   });
 }
